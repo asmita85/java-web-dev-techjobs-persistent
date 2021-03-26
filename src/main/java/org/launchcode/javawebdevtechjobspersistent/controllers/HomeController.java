@@ -20,7 +20,6 @@ import java.util.Optional;
  * Created by LaunchCode
  */
 @Controller
-@RequestMapping
 public class HomeController {
 
     @Autowired
@@ -77,8 +76,8 @@ public class HomeController {
         List<Skill> skillObjs = (List<Skill>) skillRepository.findAllById(skills);
         newJob.setSkills(skillObjs);
         jobRepository.save(newJob);
-
-        return "view";
+        model.addAttribute("jobs", jobRepository.findAll());
+        return "index";
     }
 
     @GetMapping("view/{jobId}")
